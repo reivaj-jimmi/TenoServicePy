@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TecnoServicePY</title>
+  <style>
+    /* Fondo Matrix */
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #00ff88;
+      background: transparent;
+    }
+
+    header {
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 1rem;
+      text-align: center;
+      border-bottom: 2px solid #00ff88;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 0.5rem 0;
+    }
+
+    nav a {
+      color: #00ff88;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-shadow: 0 0 5px #00ff88;
+    }
+
+    section {
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 10px;
+    }
+
+    h1, h2 {
+      color: #00ff88;
+    }
+
+    .contacto a {
+      background-color: #00ff88;
+      color: #000;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .contacto a:hover {
+      background-color: #00cc66;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: rgba(0, 0, 0, 0.8);
+      border-top: 2px solid #00ff88;
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Canvas Matrix -->
+  <canvas id="matrix"></canvas>
+
+  <header>
+    <h1>TecnoServicePY</h1>
+    <p>Soluciones técnicas rápidas y confiables</p>
+  </header>
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#nosotros">Sobre Nosotros</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+
+  <section id="inicio">
+    <h2>Bienvenido</h2>
+    <p>Reparación de celulares, computadoras y más. Atención rápida, precios justos y garantía en cada trabajo.</p>
+  </section>
+
+  <section id="servicios">
+    <h2>Servicios</h2>
+    <ul>
+      <li>🔧 Reparación de celulares</li>
+      <li>💻 Mantenimiento de computadoras</li>
+      <li>🛠️ Instalación de software</li>
+      <li>📲 Formateo y recuperación de datos</li>
+    </ul>
+  </section>
+
+  <section id="nosotros">
+    <h2>Sobre Nosotros</h2>
+    <p>Somos un equipo joven con pasión por la tecnología. Atendemos en Asunción y alrededores, con atención personalizada.</p>
+  </section>
+
+  <section id="contacto" class="contacto">
+    <h2>Contacto</h2>
+    <p>¿Querés pedir un presupuesto? Escribinos al WhatsApp:</p>
+    <a href="https://wa.me/595981234567" target="_blank">📲 Contactar por WhatsApp</a>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 TecnoServicePY. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- Script animación Matrix -->
+  <script>
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    const letters = "01";
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function drawMatrix() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#00ff88";
+      ctx.font = fontSize + "px monospace";
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+
+        drops[i]++;
+      }
+    }
+
+    setInterval(drawMatrix, 50);
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+
+</body>
+</html>
